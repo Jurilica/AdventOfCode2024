@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Solution\day1.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="Solution\Day1\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solution\Day2\input.txt" />
+      <Content Include="Solutions\Day02\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day04\input.txt" />
+      <Content Include="Solutions\Day04\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day06\input.txt" />
+      <Content Include="Solutions\Day06\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day05\input.txt" />
+      <Content Include="Solutions\Day05\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day07\input.txt" />
+      <Content Include="Solutions\Day07\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day03\input.txt" />
+      <Content Include="Solutions\Day03\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day08\input.txt" />
+      <Content Include="Solutions\Day08\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day09\input.txt" />
+      <Content Include="Solutions\Day09\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day10\input.txt" />
+      <Content Include="Solutions\Day10\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Solutions\Day11\input.txt" />
+      <Content Include="Solutions\Day11\input.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+</Project>
