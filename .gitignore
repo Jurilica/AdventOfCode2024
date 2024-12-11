@@ -6,6 +6,7 @@ riderModule.iml
 
 *.DS_Store
 *DS_Store
+*.DotSettings.user
 
 # User-specific stuff
 .idea/**/workspace.xml
