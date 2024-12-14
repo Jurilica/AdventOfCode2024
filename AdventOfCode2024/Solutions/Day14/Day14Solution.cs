@@ -9,8 +9,14 @@ public static class Day14Solution
         var input = ParseInput();
         var xSize = 101;
         var ySize = 103;
+        var middleX = xSize / 2;
+        var middleY = ySize / 2;
+
+        var sumOfFirstQuadrant = 0;
+        var sumOfSecondQuadrant = 0;
+        var sumOfThirdQuadrant = 0;
+        var sumOfFourthQuadrant = 0;
         
-        var dictionary = new Dictionary<(int X, int Y), long>();
         foreach (var guard in input)
         {
             var newX = (guard.PositionX + (guard.VelocityX * 100 % xSize)) % xSize;
@@ -26,38 +32,23 @@ public static class Day14Solution
                 newY = ySize + newY;
             }
 
-            if (dictionary.ContainsKey((newX, newY)))
+            if (newX < middleX && newY < middleY)
             {
-                dictionary[(newX, newY)]++;
+                sumOfFirstQuadrant++;
             }
-            else
+            else if(newX > middleX && newY < middleY)
             {
-                dictionary.Add((newX, newY), 1);
+                sumOfSecondQuadrant++;
+            }
+            else if (newX < middleX && newY > middleY)
+            {
+                sumOfThirdQuadrant++;
+            }
+            else if (newX > middleX && newY > middleY)
+            {
+                sumOfFourthQuadrant++;
             }
         }
-        
-        var middleX = xSize / 2;
-        var middleY = ySize / 2;
-        
-        var sumOfFirstQuadrant = dictionary
-            .Where(x => x.Key.X < middleX)
-            .Where(x => x.Key.Y < middleY)
-            .Sum(x => x.Value);
-        
-        var sumOfSecondQuadrant = dictionary
-            .Where(x => x.Key.X > middleX)
-            .Where(x => x.Key.Y < middleY)
-            .Sum(x => x.Value);
-        
-        var sumOfThirdQuadrant = dictionary
-            .Where(x => x.Key.X < middleX)
-            .Where(x => x.Key.Y > middleY)
-            .Sum(x => x.Value);
-
-        var sumOfFourthQuadrant = dictionary
-            .Where(x => x.Key.X > middleX)
-            .Where(x => x.Key.Y > middleY)
-            .Sum(x => x.Value);
         
         return sumOfFirstQuadrant * sumOfSecondQuadrant * sumOfThirdQuadrant * sumOfFourthQuadrant;
     }
