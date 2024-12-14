@@ -6,21 +6,74 @@ public static class Day14Solution
 {
     public static long SolveFirstPart()
     {
-        var input = ParseInput();
         var xSize = 101;
         var ySize = 103;
         var middleX = xSize / 2;
         var middleY = ySize / 2;
 
-        var sumOfFirstQuadrant = 0;
-        var sumOfSecondQuadrant = 0;
-        var sumOfThirdQuadrant = 0;
-        var sumOfFourthQuadrant = 0;
+        var dictionary = CalculateCurrentPosition(xSize, ySize, 100);
         
+        var sumOfFirstQuadrant = dictionary
+            .Where(x => x.Key.X < middleX)
+            .Where(x => x.Key.Y < middleY)
+            .Sum(x => x.Value);
+        
+        var sumOfSecondQuadrant = dictionary
+            .Where(x => x.Key.X > middleX)
+            .Where(x => x.Key.Y < middleY)
+            .Sum(x => x.Value);
+        
+        var sumOfThirdQuadrant = dictionary
+            .Where(x => x.Key.X < middleX)
+            .Where(x => x.Key.Y > middleY)
+            .Sum(x => x.Value);
+        
+        var sumOfFourthQuadrant = dictionary
+            .Where(x => x.Key.X > middleX)
+            .Where(x => x.Key.Y > middleY)
+            .Sum(x => x.Value);
+        
+        return sumOfFirstQuadrant * sumOfSecondQuadrant * sumOfThirdQuadrant * sumOfFourthQuadrant;
+    }
+
+    public static void SolveSecondPart()
+    {
+        var xSize = 101;
+        var ySize = 103;
+        
+        var fileWriter = new StreamWriter("Solutions/Day14/result.txt");
+
+        var i = 1;
+        while(i < 10_000)
+        {
+            var dictionary = CalculateCurrentPosition(xSize, ySize, i);
+
+            fileWriter.WriteLine("////////////////////////");
+            fileWriter.WriteLine($"Seconds:{i}");
+            fileWriter.WriteLine("////////////////////////");
+            
+            for (var y = 0; y < ySize; y++)
+            {
+                for (var x = 0; x < xSize; x++)
+                {
+                    Console.Write(dictionary.ContainsKey((x, y)) ? "#" : " ");
+                }
+                Console.Write("\n");
+            }
+
+            i++;
+        }
+    }
+
+    private static Dictionary<(int X, int Y), long> CalculateCurrentPosition(int xSize, int ySize, int numberOfSeconds)
+    {
+        var input = ParseInput();
+        
+        var dictionary = new Dictionary<(int X, int Y), long>();
         foreach (var guard in input)
         {
-            var newX = (guard.PositionX + (guard.VelocityX * 100 % xSize)) % xSize;
-            var newY = (guard.PostionY + (guard.VelocityY * 100 % ySize)) % ySize;
+            var newX = (guard.PositionX + (guard.VelocityX * numberOfSeconds % xSize)) % xSize;
+            var newY = (guard.PostionY + (guard.VelocityY * numberOfSeconds % ySize)) % ySize;
 
             if (newX < 0)
             {
@@ -32,25 +85,17 @@ public static class Day14Solution
                 newY = ySize + newY;
             }
 
-            if (newX < middleX && newY < middleY)
+            if (dictionary.ContainsKey((newX, newY)))
             {
-                sumOfFirstQuadrant++;
+                dictionary[(newX, newY)]++;
             }
-            else if(newX > middleX && newY < middleY)
+            else
             {
-                sumOfSecondQuadrant++;
-            }
-            else if (newX < middleX && newY > middleY)
-            {
-                sumOfThirdQuadrant++;
-            }
-            else if (newX > middleX && newY > middleY)
-            {
-                sumOfFourthQuadrant++;
+                dictionary.Add((newX, newY), 1);
             }
         }
         
-        return sumOfFirstQuadrant * sumOfSecondQuadrant * sumOfThirdQuadrant * sumOfFourthQuadrant;
+        return dictionary;
     }
     
     private static List<(int PositionX, int PostionY, int VelocityX, int VelocityY)> ParseInput()

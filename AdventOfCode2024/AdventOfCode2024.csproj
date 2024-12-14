@@ -67,6 +67,7 @@
       <Content Include="Solutions\Day14\input.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <None Remove="Solutions\Day14\result.txt" />
     </ItemGroup>
 
 </Project>
