@@ -1,3 +1,3 @@
-﻿using AdventOfCode2024.Solutions.Day14;
+﻿using AdventOfCode2024.Solutions.Day15;
 
-Day14Solution.SolveSecondPart();
+Console.WriteLine(Day15Solution.SolveFirstPart());
